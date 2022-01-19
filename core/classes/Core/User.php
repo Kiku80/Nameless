@@ -14,6 +14,7 @@ class User {
 
     private $_data;
     private array $_groups = [];
+    private array $_integrations = [];
     private array $_placeholders;
     private string $_sessionName;
     private string $_cookieName;
@@ -83,6 +84,16 @@ class User {
                     }
 
                     $this->addGroup($default_group_id, 0, $default_group);
+                }
+
+                // Get user integrations
+                $integrations = $this->_db->selectQuery('SELECT * FROM nl2_user_integrations WHERE user_id = ?;', [$this->_data->id]);
+                if ($integrations->count()) {
+                    $integrations = $integrations->results();
+                    
+                    foreach ($integrations as $item) {
+                        $this->_integrations[$item->integration_id] = $item;
+                    }
                 }
 
                 return true;
@@ -594,12 +605,21 @@ class User {
     }
 
     /**
-     * Get the currently logged in user's groups.
+     * Get user groups.
      *
      * @return array Their groups.
      */
     public function getGroups(): array {
         return $this->_groups;
+    }
+    
+    /**
+     * Get user integrations.
+     *
+     * @return array Their integrations.
+     */
+    public function getConnectedIntegrations(): array {
+        return $this->_integrations;
     }
 
     /**

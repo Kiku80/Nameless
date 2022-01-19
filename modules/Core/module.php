@@ -2,7 +2,7 @@
 /*
  *  Made by Samerton
  *  https://github.com/NamelessMC/Nameless/
- *  NamelessMC version 2.0.0-pr12
+ *  NamelessMC version 2.0.0-pr13
  *
  *  License: MIT
  *
@@ -62,6 +62,7 @@ class Core_Module extends Module {
         $pages->add('Core', '/user/alerts', 'pages/user/alerts.php');
         $pages->add('Core', '/user/placeholders', 'pages/user/placeholders.php');
         $pages->add('Core', '/user/acknowledge', 'pages/user/acknowledge.php');
+        $pages->add('Core', '/user/connections', 'pages/user/connections.php');
 
         // Panel
         $pages->add('Core', '/panel', 'pages/panel/index.php');
@@ -371,6 +372,10 @@ class Core_Module extends Module {
             $api->throwError(16, $api->getLanguage()->get('api', 'unable_to_find_user'), $value);
             die();
         });
+        
+        // Minecraft Integration
+        require_once(ROOT_PATH . "/modules/{$this->getName()}/classes/Integrations/MinecraftIntegration.php");
+        Integrations::getInstance()->registerIntegration(new MinecraftIntegration());
     }
 
     public static function getDashboardGraphs(): array {
