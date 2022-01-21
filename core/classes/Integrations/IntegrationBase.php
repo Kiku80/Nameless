@@ -21,7 +21,7 @@ abstract class IntegrationBase {
         $this->_db = DB::getInstance();
         
         $integration = $this->_db->selectQuery('SELECT * FROM nl2_integrations WHERE name = ?', [$this->_name]);
-        if($integration->count()) {
+        if ($integration->count()) {
             $integration = $integration->first();
 
             $this->_data = $integration;
@@ -66,6 +66,6 @@ abstract class IntegrationBase {
         return $this->_data;
     }
 
-    abstract public function linkUser(User $user);
-    abstract public function unlinkUser(User $user);
+    abstract public function onLink(User $user);
+    abstract public function onUnlink(User $user);
 }

@@ -148,6 +148,13 @@ class RegisterEndpoint extends KeyAuthEndpoint {
 
             $user = new User($user_id);
             $user->setGroup($default_group);
+            
+            // Minecraft Integration
+            if ($uuid != 'none') {
+                $integrations = Integrations::getInstance();
+                                
+                $integrations->linkIntegrationForUser($user, $integrations->getIntegration('Minecraft'), $uuid, $username, true);
+            }
 
             EventHandler::executeEvent('registerUser', [
                     'user_id' => $user_id,

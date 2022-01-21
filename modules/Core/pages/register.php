@@ -372,6 +372,13 @@ if (Input::exists()) {
                                 }
                             }
 
+                            // Minecraft Integration
+                            if ($minecraft == 1) {
+                                $integrations = Integrations::getInstance();
+
+                                $integrations->linkIntegrationForUser($user, $integrations->getIntegration('Minecraft'), $uuid, $username, false);
+                            }
+
                             Log::getInstance()->log(Log::Action('user/register'));
 
                             if ($api_verification != '1' && $email_verification == '1') {

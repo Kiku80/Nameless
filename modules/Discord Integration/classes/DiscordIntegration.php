@@ -11,16 +11,18 @@
  */
 
 class DiscordIntegration extends IntegrationBase {
-    
+
     public function __construct() {
         $this->_name = 'Discord';
 
         parent::__construct();
     }
 
-    public function linkUser(User $user) {
+    public function onLink(User $user) {
+
     }
-    
-    public function unlinkUser(User $user) {
+
+    public function onUnlink(User $user) {
+
     }
 }
