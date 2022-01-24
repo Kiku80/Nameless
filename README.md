@@ -81,6 +81,3 @@ We welcome all contributions of code and translations. Please feel free to fork 
     ```
   - This could take up to about a minute depending on your internet connection.
 
-## Special Thanks
-- All NamelessMC [contributors](https://github.com/NamelessMC/Nameless/graphs/contributors).
-- [JetBrains](https://www.jetbrains.com/), whose products are used to develop the NamelessMC project.
